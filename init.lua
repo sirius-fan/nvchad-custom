@@ -4,6 +4,8 @@ vim.cmd [[
     ]]
     -- set guifont=思源宋体
     
+-- 不记录历史改动
+vim.opt.undofile = false
 
 -- for nvui
 if vim.g.nvui then
@@ -18,5 +20,4 @@ if vim.g.nvui then
     -- :NvuiTitlebarColors #abb2bb #1e222a
     -- vim.cmd('guifont DroidSansMono Nerd Font Mono')
     -- guifont=Consolas:h12,JetbrainsMono\ NF
-
 end
