@@ -2,6 +2,8 @@
 local M = {}
 local pluginConfs = require "custom.plugins.configs"
 local userPlugins = require "custom.plugins" -- path to table
+local override = require "custom.override"
+
 
 -- make sure you maintain the structure of `core/default_config.lua` here,
 -- example of changing theme:
@@ -17,15 +19,26 @@ M.plugins = {
     -- 覆盖默认插件设置，不用全部重写
     override = {
         --   ["nvim-treesitter/nvim-treesitter"] = pluginConfs.treesitter,
-        ["kyazdani42/nvim-tree.lua"] = pluginConfs.nvimtree
-    },
+        ["kyazdani42/nvim-tree.lua"] = pluginConfs.nvimtree,
+        --     ["kyazdani42/nvim-tree.lua"] = override.nvimtree,
+    ["nvim-treesitter/nvim-treesitter"] = override.treesitter,
+--     ["lukas-reineke/indent-blankline.nvim"] = override.blankline,
+--     ["goolord/alpha-nvim"] = override.alpha,
+    ["williamboman/mason.nvim"] = override.mason,
 
-    options = {
-      lspconfig = {
-         setup_lspconf = "custom.plugins.lspconfig",
-      },
-   },
+
+    },
+    -- user = require "custom.plugins",
+
+
+--     options = {
+--       lspconfig = {
+--          setup_lspconf = "custom.plugins.lspconfig",
+--       },
+--    },
+
 }
+
 
 -- 修改whichkey
 

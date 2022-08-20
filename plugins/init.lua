@@ -8,7 +8,22 @@ return {
 --              vim.fn['firenvim#uninstall'](0)
 --          end
 --      },
-    ["potamides/pantran.nvim"]={}
+    ["neovim/nvim-lspconfig"] = {
+    config = function()
+      require "plugins.configs.lspconfig"
+      require "custom.plugins.lspconfig"
+    end,
+    },
+    ['folke/which-key.nvim'] = { disable = false  },
+    ["potamides/pantran.nvim"]={},
+    -- format
+    ["jose-elias-alvarez/null-ls.nvim"] = {
+        after = "nvim-lspconfig",
+        config = function()
+           require "custom.plugins.null-ls"
+        end,
+   }
+    
 
 }
 

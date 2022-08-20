@@ -1,24 +1,48 @@
-local M = {}
+-- local M = {}
+--
+-- M.setup_lsp = function(attach, capabilities)
+--     local lspconfig = require "lspconfig"
+--
+--     -- lspservers with default config
+--     local servers = {"clangd", "gopls", "pylsp", "rust_analyzer"}
+--
+--     for _, lsp in ipairs(servers) do
+--         lspconfig[lsp].setup {
+--             on_attach = function(client, bufnr)
+--                 attach(client, bufnr)
+--                 -- change gopls server capabilities
+--                 --       if lsp == "gopls" then
+--                 client.resolved_capabilities.document_formatting = true
+--                 client.resolved_capabilities.document_range_formatting = true
+--                 --       end
+--             end,
+--             capabilities = capabilities
+--         }
+--     end
+-- end
+-- return M
 
-M.setup_lsp = function(attach, capabilities)
-    local lspconfig = require "lspconfig"
 
-    -- lspservers with default config
-    local servers = {"clangd", "gopls", "pylsp", "rust_analyzer"}
+local on_attach = require("plugins.configs.lspconfig").on_attach
+local capabilities = require("plugins.configs.lspconfig").capabilities
 
-    for _, lsp in ipairs(servers) do
-        lspconfig[lsp].setup {
-            on_attach = function(client, bufnr)
-                attach(client, bufnr)
-                -- change gopls server capabilities
-                --       if lsp == "gopls" then
-                client.resolved_capabilities.document_formatting = true
-                client.resolved_capabilities.document_range_formatting = true
-                --       end
-            end,
-            capabilities = capabilities
-        }
-    end
+local lspconfig = require("lspconfig")
+local servers = {"clangd", "jsonls", "pylsp"}
+
+for _, lsp in ipairs(servers) do
+    lspconfig[lsp].setup({
+        on_attach = on_attach,
+        -- on_attach = function(client, bufnr)
+        --     attach(client, bufnr)
+        --     -- change gopls server capabilities
+        --     --       if lsp == "gopls" then
+        --     client.resolved_capabilities.document_formatting = true
+        --     client.resolved_capabilities.document_range_formatting = true
+        --     --       end
+        -- end,
+        capabilities = capabilities
+
+    })
 end
 
 -- local keybinds = require('lsp_config.keybinds')
@@ -33,5 +57,3 @@ end
 --         },
 --         filetypes = {"c", "cpp", "objc", "objcpp"},
 -- }
-
-return M
