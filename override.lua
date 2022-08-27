@@ -8,6 +8,7 @@ M.treesitter = {
     "vim",
 --     "html",
 --     "css",
+    "cpp",
 --     "javascript",
     "json",
 --     "toml",
