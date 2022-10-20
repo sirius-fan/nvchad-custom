@@ -1,28 +1,3 @@
--- local M = {}
---
--- M.setup_lsp = function(attach, capabilities)
---     local lspconfig = require "lspconfig"
---
---     -- lspservers with default config
---     local servers = {"clangd", "gopls", "pylsp", "rust_analyzer"}
---
---     for _, lsp in ipairs(servers) do
---         lspconfig[lsp].setup {
---             on_attach = function(client, bufnr)
---                 attach(client, bufnr)
---                 -- change gopls server capabilities
---                 --       if lsp == "gopls" then
---                 client.resolved_capabilities.document_formatting = true
---                 client.resolved_capabilities.document_range_formatting = true
---                 --       end
---             end,
---             capabilities = capabilities
---         }
---     end
--- end
--- return M
-
-
 local on_attach = require("plugins.configs.lspconfig").on_attach
 local capabilities = require("plugins.configs.lspconfig").capabilities
 
@@ -30,19 +5,33 @@ local lspconfig = require("lspconfig")
 local servers = {"clangd", "jsonls", "pylsp"}
 
 for _, lsp in ipairs(servers) do
+    user_capabilities = capabilities
+    if (lsp == "clangd") then
+        -- multiple different client offset_encodings detected for buffer, this is not suppor ted yet
+        -- https://www.reddit.com/r/neovim/comments/tul8pb/lsp_clangd_warning_multiple_different_client/
+        user_capabilities.offsetEncoding = "utf-8"
+        lspconfig[lsp].setup({
+            on_attach = on_attach,
+            capabilities = user_capabilities,
+            cmd = {
+                "clangd", 
+                "--background-index",
+                "--suggest-missing-includes",
+                "--enable-config",
+                "--fallback-style=google",
+                
+            }
+
+        })
+        goto continue
+    end
+
     lspconfig[lsp].setup({
         on_attach = on_attach,
-        -- on_attach = function(client, bufnr)
-        --     attach(client, bufnr)
-        --     -- change gopls server capabilities
-        --     --       if lsp == "gopls" then
-        --     client.resolved_capabilities.document_formatting = true
-        --     client.resolved_capabilities.document_range_formatting = true
-        --     --       end
-        -- end,
-        capabilities = capabilities
+        capabilities = user_capabilities
 
     })
+    ::continue::
 end
 
 -- local keybinds = require('lsp_config.keybinds')

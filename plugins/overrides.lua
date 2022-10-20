@@ -1,23 +1,8 @@
- 
 -- overriding default plugin configs!
-
 local M = {}
 
 M.treesitter = {
-  ensure_installed = {
-    "vim",
---     "html",
---     "css",
-    "cpp",
---     "javascript",
-    "json",
---     "toml",
-    "markdown",
-    "c",
-    "bash",
-    "lua",
---     "norg",
-  },
+    ensure_installed = {"vim", "cpp", "json", "markdown", "c", "bash", "lua", "python"}
 }
 
 -- M.nvimtree = {
@@ -68,24 +53,28 @@ M.treesitter = {
 -- }
 
 M.mason = {
-  ensure_installed = {
-    "clangd",
-    -- lua stuff
-    "lua-language-server",
-    "stylua",
+    ensure_installed = {"clangd", -- lua stuff
+    "lua-language-server", "stylua", -- web dev
+    --     "css-lsp",
+    --     "html-lsp",
+    --     "typescript-language-server",
+    --     "deno",
+    --     "emmet-ls",
+    "json-lsp" --     -- shell
+    --     "shfmt",
+    --     "shellcheck",
+    }
+}
 
-    -- web dev
---     "css-lsp",
---     "html-lsp",
---     "typescript-language-server",
---     "deno",
---     "emmet-ls",
-    "json-lsp",
-
---     -- shell
---     "shfmt",
---     "shellcheck",
-  },
+M.nvimtree = {
+    -- git = {
+    --    enable = true,
+    -- },
+    view = {
+        side = "left",
+        width = 25,
+        hide_root_folder = false
+    }
 }
 
 return M
