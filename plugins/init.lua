@@ -20,7 +20,7 @@ return {
         override_options = overrides.treesitter
     },
     ["kyazdani42/nvim-tree.lua"] = {
-      override_options = overrides.nvimtree,
+        override_options = overrides.nvimtree
     },
     ["williamboman/mason.nvim"] = {
         override_options = overrides.mason
@@ -28,6 +28,7 @@ return {
     ['folke/which-key.nvim'] = {
         disable = false
     },
+    ['voldikss/vim-translator'] = {},
     -- format
     ["jose-elias-alvarez/null-ls.nvim"] = {
         after = "nvim-lspconfig",

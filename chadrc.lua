@@ -10,7 +10,7 @@ M.plugins = userPlugins
 -- example of changing theme:
 
 M.ui= {
-    theme = "one_light"
+    theme = "onedark"
 }
 -- M.plugins = {
 --     -- 添加自定义插件
