@@ -11,7 +11,7 @@ return {
   --          end
   --      },
   ["neovim/nvim-lspconfig"] = {
-    after="mason-lspconfig",
+    -- after="mason-lspconfig",
     config = function()
       require "plugins.configs.lspconfig"
       require "custom.plugins.lspconfig"
