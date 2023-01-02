@@ -1,4 +1,4 @@
-vim.o.guifont = "JetBrainsMono Nerd Font"
+vim.o.guifont = "JetBrainsMono Nerd Font:h13"
 vim.cmd [[
     :command -nargs=0 Q :qall
     ]]
