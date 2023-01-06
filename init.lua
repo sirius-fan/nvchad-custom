@@ -2,8 +2,6 @@ vim.o.guifont = "JetBrainsMono Nerd Font:h13"
 vim.cmd [[
     :command -nargs=0 Q :qall
     ]]
-    -- set guifont=思源宋体
-    
 -- 不记录历史改动
 vim.opt.undofile = false
 

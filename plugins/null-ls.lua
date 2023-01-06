@@ -15,9 +15,9 @@ local sources = {
   -- Lua
   b.formatting.stylua,
 
---   -- Shell
---   b.formatting.shfmt,
---   b.diagnostics.shellcheck.with { diagnostics_format = "#{m} [#{c}]" },
+  -- Shell
+  b.formatting.shfmt,
+  b.diagnostics.shellcheck.with { diagnostics_format = "#{m} [#{c}]" },
   -- python  
   b.formatting.yapf,
 
