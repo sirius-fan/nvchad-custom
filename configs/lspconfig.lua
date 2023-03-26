@@ -31,6 +31,11 @@ for _, lsp in ipairs(servers) do
   ::continue::
 end
 
+
+--
+-- lspconfig.pyright.setup { blabla}
+
+
 -- local keybinds = require('lsp_config.keybinds')
 
 -- require('lspconfig').clangd.setup {
@@ -66,3 +71,4 @@ lspconfig.rust_analyzer.setup {
     },
   },
 }
+
