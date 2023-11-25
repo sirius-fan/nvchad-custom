@@ -36,10 +36,11 @@ M.nvimtree = {
   view = {
         side = "left",
         width = 25,
-        hide_root_folder = false
+        -- hide_root_folder = false
     },
 
   renderer = {
+    root_folder_label = true,
     highlight_git = true,
     icons = {
       show = {
