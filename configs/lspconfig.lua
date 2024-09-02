@@ -23,6 +23,37 @@ for _, lsp in ipairs(servers) do
     }
     goto continue
   end
+  if lsp == "pylsp" then
+    lspconfig[lsp].setup {
+      settings = {
+        pylsp = {
+          plugins = {
+            pycodestyle = { enabled = false, ignore = { "E501" } , maxLineLength = 120 },
+            pyflakes = { enabled = false },
+            pylint = { enabled = false , ignore = { "E501" }},
+            yapf = { enabled = false },
+            flake8 = { enabled = true , ignore = { "E501" }},
+            jedi_completion = { enabled = true },
+            jedi_definition = { enabled = true },
+            jedi_hover = { enabled = true },
+            jedi_references = { enabled = true },
+            jedi_signature_help = { enabled = true },
+            jedi_symbols = { enabled = true },
+            mccabe = { enabled = false },
+            mypy = { enabled = false },
+            pep8 = { enabled = false },
+            pydocstyle = { enabled = false },
+            rope_completion = { enabled = true },
+            rope_definition = { enabled = true },
+            rope_hover = { enabled = true },
+            rope_references = { enabled = true },
+            rope_rename = { enabled = true },
+          },
+        },
+      },
+    }
+    goto continue
+  end
 
   lspconfig[lsp].setup {
     on_attach = on_attach,

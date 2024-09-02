@@ -21,7 +21,7 @@ local plugins = {
       require "custom.configs.lspconfig"
     end, -- Override to setup mason-lspconfig
   },
-  
+
   -- override plugin configs
   {
     "williamboman/mason.nvim",
@@ -47,6 +47,10 @@ local plugins = {
     end,
   },
 
+  {
+    "github/copilot.vim",
+    lazy = false,
+  }
   -- To make a plugin not be loaded
   -- {
   --   "NvChad/nvim-colorizer.lua",
