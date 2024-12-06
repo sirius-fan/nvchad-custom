@@ -1,17 +1,21 @@
-local on_attach = require("plugins.configs.lspconfig").on_attach
-local capabilities = require("plugins.configs.lspconfig").capabilities
+-- load defaults i.e lua_lsp
+require("nvchad.configs.lspconfig").defaults()
 
 local lspconfig = require "lspconfig"
-local servers = { "clangd", "jsonls", "pylsp", "neocmake" }
 
+-- EXAMPLE
+local servers = { "clangd", "pylsp", "jsonls", "html", "cssls", "neocmake"}
+local nvlsp = require "nvchad.configs.lspconfig"
+
+-- lsps with default config
 for _, lsp in ipairs(servers) do
-  user_capabilities = capabilities
   if lsp == "clangd" then
+    local user_capabilities = nvlsp.capabilities
     -- multiple different client offset_encodings detected for buffer, this is not suppor ted yet
     -- https://www.reddit.com/r/neovim/comments/tul8pb/lsp_clangd_warning_multiple_different_client/
     user_capabilities.offsetEncoding = "utf-8"
     lspconfig[lsp].setup {
-      on_attach = on_attach,
+      on_attach = nvlsp.on_attach,
       capabilities = user_capabilities,
       cmd = {
         "clangd",
@@ -25,6 +29,9 @@ for _, lsp in ipairs(servers) do
   end
   if lsp == "pylsp" then
     lspconfig[lsp].setup {
+      on_attach = nvlsp.on_attach,
+      on_init = nvlsp.on_init,
+      capabilities = nvlsp.capabilities,
       settings = {
         pylsp = {
           plugins = {
@@ -56,28 +63,18 @@ for _, lsp in ipairs(servers) do
   end
 
   lspconfig[lsp].setup {
-    on_attach = on_attach,
-    capabilities = user_capabilities,
+    on_attach = nvlsp.on_attach,
+    on_init = nvlsp.on_init,
+    capabilities = nvlsp.capabilities,
   }
   ::continue::
 end
 
-
---
--- lspconfig.pyright.setup { blabla}
-
-
--- local keybinds = require('lsp_config.keybinds')
-
--- require('lspconfig').clangd.setup {
---         on_attach = keybinds.on_attach,
---         cmd = {
---             "clangd",
---             "--background-index",
---             "--suggest-missing-includes",
---             '--query-driver="/usr/local/opt/gcc-arm-none-eabi-8-2019-q3-update/bin/arm-none-eabi-gcc"'
---         },
---         filetypes = {"c", "cpp", "objc", "objcpp"},
+-- configuring single server, example: typescript
+-- lspconfig.ts_ls.setup {
+--   on_attach = nvlsp.on_attach,
+--   on_init = nvlsp.on_init,
+--   capabilities = nvlsp.capabilities,
 -- }
 
 -- rust-analyzer
@@ -102,4 +99,3 @@ lspconfig.rust_analyzer.setup {
     },
   },
 }
-
